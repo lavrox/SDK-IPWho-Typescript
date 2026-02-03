@@ -1,0 +1,16 @@
+{
+  "name": "ipwho",
+  "version": "1.0.0",
+  "description": "SDK for IPWho API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --minify --dts",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  }
+}
