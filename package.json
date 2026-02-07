@@ -1,5 +1,5 @@
 {
-  "name": "ipwho",
+  "name": "@ipwho/ipwho",
   "version": "1.0.1",
   "description": "SDK for IPWho API",
   "main": "dist/index.js",
