@@ -1,6 +1,6 @@
 # IPWho TypeScript SDK
 
-TypeScript SDK for the [IPWho API](https://ipwho.org/) - Get detailed IP geolocation, timezone, connection, and security information with full type safety.
+TypeScript SDK for the [IPWho IP Geolocation API by ipwho.org](https://ipwho.org/) - Get detailed IP geolocation, timezone, connection, and security information with full type safety.
 
 ## Installation
 
