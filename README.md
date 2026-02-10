@@ -1,6 +1,6 @@
 # IPWho TypeScript SDK
 
-TypeScript SDK for the [IPWho IP Geolocation API by ipwho.org](https://ipwho.org/) - Get detailed IP geolocation, timezone, connection, and security information with full type safety.
+TypeScript SDK for the [IPWho Geolocation API (ipwho.org)](https://ipwho.org/) - Get detailed IP geolocation, timezone, connection, and security information with full type safety.
 
 ## Installation
 
@@ -36,13 +36,18 @@ Initialize the client with your API key:
 ```typescript
 const client = new IPWho('your-api-key');
 ```
-Get your API key by signing up [here](https://www.ipwho.org/signup).
+Get your API key by signing up at [https://www.ipwho.org/signup](https://www.ipwho.org/signup).
 
 The SDK automatically includes your API key in the `X-API-Key` header for all requests. Missing API keys will throw an error immediately.
 
 ## Methods
 
 All methods accept an optional `ip` parameter. When omitted, the SDK uses the caller's IP address (calls `/me` endpoint). When provided, it queries the specific IP (calls `/ip/{ip}` endpoint).
+
+### Normalization behavior
+
+- `getLocation`, `getTimezone`, `getConnection`, and `getSecurity` return *normalized* objects (camelCase keys like `countryCode`, `timeZone`, `asnNumber`, etc.).
+- `getMe` and `getIp` return the *raw API payload* (`IPWhoData`) as returned by the API. Depending on the API version/edge, nested objects may include a mix of `camelCase` and `snake_case` keys (for example `timezone.time_zone`, `geoLocation.accuracy_radius`, `geoLocation.postal_Code`).
 
 ### `getLocation(ip?: string): Promise<GeoLocation | null>`
 
@@ -76,7 +81,7 @@ console.log(location);
 //   isInEu: false,
 //   latitude: -27.4766,
 //   longitude: 153.0166,
-//   accuracyRadius: 500
+//   accuracyRadius: 1000
 // }
 ```
 
@@ -134,6 +139,8 @@ console.log(connection);
 //   domain: "cloudflare.com",
 //   connectionType: "Data Center/Web Hosting/Transit"
 // }
+
+// Note: `connectionType` is a descriptive string from the API (values may vary).
 ```
 
 ### `getSecurity(ip?: string): Promise<Security | null>`
@@ -165,6 +172,8 @@ console.log(security);
 
 Get complete IP information for the caller's IP address.
 
+Note: this returns the raw payload (not normalized).
+
 **Returns:** Full `IPWhoData` object with all available information.
 
 **Example:**
@@ -187,6 +196,8 @@ console.log(myData);
 ### `getIp(ip: string): Promise<IPWhoData>`
 
 Get complete IP information for a specific IP address.
+
+Note: this returns the raw payload (not normalized).
 
 **Parameters:**
 - `ip` (required) - IP address to query.
@@ -229,7 +240,7 @@ The SDK provides full TypeScript type definitions for all responses:
   isInEu?: boolean;            // Whether country is in EU
   latitude?: number;           // Latitude coordinate
   longitude?: number;          // Longitude coordinate
-  accuracyRadius?: number;     // Accuracy radius in kilometers
+  accuracyRadius?: number | null; // Accuracy radius in kilometers
 }
 ```
 
@@ -330,8 +341,10 @@ Full response object containing all available data:
 
 The SDK throws errors for:
 - Missing API key during initialization
-- Failed API requests
+- Failed API requests (when the API returns `success: false`)
 - Invalid API responses
+
+Network/transport errors from `fetch()` will also reject the promise.
 
 **Example:**
 ```typescript
@@ -383,8 +396,10 @@ if (location && !allowedCountries.includes(location.countryCode)) {
 
 ## License
 
-See package.json for license information.
+See [LICENSE](LICENSE).
 
 ## Support
 
-For API documentation and support, visit [https://ipwho.org/](https://ipwho.org/)
+- API docs: [https://www.ipwho.org/docs/api/geolocation-data/](https://www.ipwho.org/docs/api/geolocation-data/)
+- Support: [support@ipwho.io](mailto:support@ipwho.io)
+- Website: [https://ipwho.org/](https://ipwho.org/)
