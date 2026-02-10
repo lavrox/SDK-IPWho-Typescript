@@ -1,6 +1,6 @@
 {
   "name": "@ipwho/ipwho",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "SDK for IPWho API",
   "license": "MIT",
   "main": "dist/index.js",
