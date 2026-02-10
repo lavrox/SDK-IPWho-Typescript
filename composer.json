@@ -1,0 +1,19 @@
+{
+    "name": "ipwho/ipwho",
+    "description": "SDK for the IPWho IP Geolocation API by ipwho.org - Get detailed IP geolocation, timezone, connection, and security information with full type safety.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ipwho\\Ipwho\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Gyanaa Vaibhav",
+            "email": "gynanrudr0@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
