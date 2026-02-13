@@ -20,3 +20,6 @@ All notable changes to this project will be documented in this file.
   - Fixed broken markdown formatting for the Support link.
   - Minor README wording tweaks for clarity.
 
+## [1.0.6] - 2026-02-13
+
+- Added `keywords` to `package.json` to improve npm discoverability.
